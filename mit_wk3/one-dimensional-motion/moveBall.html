@@ -1,0 +1,39 @@
+<div id="ball" style="
+  z-index:5;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:green"></div>
+
+<script>
+
+var velocity = 5;
+var position = 0;
+var ball = document.getElementById('ball');
+
+// YOUR CODE 
+
+const moveBallRight = () => {
+  if (position >= 1575) {
+    clearInterval(intervalId)
+    intervalId = setInterval(moveBallLeft, 10)
+  }
+  position += velocity
+  ball.style.left = position + 'px'
+}
+
+const moveBallLeft = () => {
+  if (position <= 0) {
+    clearInterval(intervalId)
+    intervalId = setInterval(moveBallRight, 10)
+  }
+  position -= velocity
+  ball.style.left = position + 'px'
+}
+
+intervalId = setInterval(moveBallRight, 10)
+
+</script>

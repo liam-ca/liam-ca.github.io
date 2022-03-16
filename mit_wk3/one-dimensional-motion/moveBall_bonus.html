@@ -1,0 +1,71 @@
+<head><link rel="stylesheet" href="styles.css" /></head>
+
+<div id="firstBall" class="ball" style="
+  left: 5px;
+  top: 0px;
+  background: black
+"></div>
+<div id="secondBall" class="ball" style="
+  left: 211px;
+  top: 107px;
+  background: black
+"></div>
+
+<script>
+
+var balls = [{
+  velocityX: 2.5,
+  velocityY: 2.5,
+  positionX: 0,
+  positionY: 0,
+  reverseX: false,
+  reverseY: false,
+  obj: document.getElementById('firstBall')
+},
+{
+  velocityX: 2.5,
+  velocityY: 2.5,
+  positionX: 211,
+  positionY: 107,
+  reverseX: true,
+  reverseY: false,
+  obj: document.getElementById('secondBall')
+}]
+
+const moveBalls = () => {
+
+  var Xmin = 0;
+  var Xmax = 1575;
+  var Ymin = 0;
+  var Ymax = 780;
+
+  var i = 0
+  while (i < balls.length) {
+    let ball = balls[i]
+    !ball.reverseX ? ball.positionX += ball.velocityX : ball.positionX -= ball.velocityX
+    !ball.reverseY ? ball.positionY += ball.velocityY : ball.positionY -= ball.velocityY
+    ball.obj.style.left = ball.positionX + "px"
+    ball.obj.style.top = ball.positionY + "px"
+
+    if (ball.positionX >= Xmax || ball.positionX <= Xmin) {
+      ball.reverseX = !ball.reverseX
+      ball.velocityX = Math.random() * (3 - 2) + 2
+      ball.velocityY = Math.random() * (3 - 2) + 2
+      var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+      ball.obj.style.background = randomColor
+    }
+    if (ball.positionY >= Ymax || ball.positionY <= Ymin) {
+      ball.reverseY = !ball.reverseY
+      ball.velocityX = Math.random() * (3 - 2) + 2
+      ball.velocityY = Math.random() * (3 - 2) + 2
+      var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+      ball.obj.style.background = randomColor
+    }
+    i++
+  }
+}
+
+setInterval(moveBalls, 20)
+setInterval(moveBalls, 20)
+
+</script>
